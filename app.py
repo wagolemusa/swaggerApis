@@ -7,7 +7,7 @@ api  = Api(app)
 a_languages = api.model('Language', {'language' : fields.String('The language')})
 
 languages = []
-python = {'language': 'Python'}
+python = {'language': 'Python', 'id' : 1}
 languages.append(python)
 
 @api.route('/language')
@@ -17,7 +17,10 @@ class Language(Resource):
     
     @api.expect(a_languages)
     def post(self):
-        languages.append(api.payload)
+        #languages.append(api.payload)
+        new_language = api.payload
+        new_language['id'] = len(languages) + 1
+        languages.append(new_language)
         return {'result' :  'Language added'}, 201
 
 
