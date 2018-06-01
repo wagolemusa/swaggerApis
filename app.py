@@ -2,7 +2,9 @@ from flask import Flask
 from flask_restplus import Api, Resource, fields
 
 app  = Flask(__name__)
-api  = Api(app)
+api  = Api(app) #,doc=False
+
+app.config['SWAGGER_UI_JSONEDITOR'] = True
 
 a_languages = api.model('Language', {'language' : fields.String('The language')}) #, 'id' : fields.Integer('ID')
 
